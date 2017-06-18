@@ -1,0 +1,99 @@
+Exercises2_sol.txt
+Taken from http://www.loria.fr/~rougier/teaching/numpy.100/index.html
+
+1. Import the numpy package under the name np
+	import numpy as np
+
+2. Create a null vector of size 10
+	Z = np.zeros(10)
+
+3. Create a null vector of size 10 but the fifth value which is 1
+	Z = np.zeros(10)
+	Z[4] = 1
+	
+4. Create a vector with values ranging from 10 to 99
+	Z = 10 + np.arange(90)
+	
+5. Create a 3x3 matrix with values ranging from 0 to 8
+	Z = np.arange(9).reshape(3,3)
+
+6. Find indices of non-zero elements from [1,2,0,0,4,0]
+	nz = np.nonzero([1,2,0,0,4,0])
+
+7. Declare a 3x3 identity matrix
+	Z = np.eye(3)
+	
+8.  a) Declare a 10x10x10 array with random values
+	Z = np.random.random((10,10,10))
+
+	b) Generate an array with 10 random numbers extracted from a poisson distribution with \lambda = 5:
+	Z = np.random.poisson(5,10)
+	
+9. Declare a 8x8 matrix and fill it with a checkerboard pattern
+	Z = np.zeros((8,8))
+	Z[1::2,::2] = 1
+	Z[::2,1::2] = 1
+
+10. a) Declare a 10x10 array with random values and find the minimum and maximum values
+	Z = np.random.random((10,10))
+	Zmin, Zmax = Z.min(), Z.max()
+	
+	b) Generate an array with random 100 integer numbers, ranging from 5 to 97. Check the mean of the even numbers.
+	Z = np.random.random_integers(5,97,100)
+	Z = Z[np.where(Z % 2 == 0)]
+	Z.mean()
+	c) Generate an  array with 5 numbers for 1 to 50. Make sure there is no numbers repeated in the selected 5.
+	Z = range(1,51)
+	np.random.shuffle(Z)
+	Z5 = Z[:5]
+
+	Alternative solution with random module:
+	import random
+	Z = np.random.sample(range(1,51),5)
+	
+11. Normalize a 5x5 random matrix (between 0 and 1)
+	Z = np.random.random((5,5))
+	Zmax,Zmin = Z.max(), Z.min()
+	Z = (Z - Zmin)/(Zmax - Zmin)
+	
+12. a) Multiply a 3x3 matrix by a 3x3 matrix 
+		Z = np.ones((3,3)) * np.ones((3,3))
+	b) Multiply a 5x3 matrix by a 3x2 matrix (real matrix product)
+		Z = np.dot(np.ones((3,3)), np.ones((3,3)))
+	c) Multiply a 5x3 matrix by a 3x2 matrix (real matrix product)
+		Z = np.dot(np.ones((5,3)), np.ones((3,2)))
+	d) try to multiply a 5x3 matrix by a 3x2 matrix
+		Z = np.ones((5,3)) * np.ones((3,2))
+
+13. Create a vector of size 1000 with values ranging from 0 to 1, both excluded
+	Z = np.random.linspace(0,1,1002,endpoint=True)[1:-1]
+	
+14. Create a random vector of size 100 and sort it, and find its mean value
+	Z = np.random.random(100)
+	Z.sort()
+	m = Z.mean()
+	
+15. Create random vector of size 100 and replace the maximum value by 0
+	Z = np.random.random(100)
+	Z[Z.argmax()] = 0
+
+16. Generate a generic 2D Gaussian-like array
+	X, Y = np.meshgrid(np.linspace(-1,1,100), np.linspace(-1,1,100))
+	D = np.sqrt(X*X+Y*Y)
+	sigma, mu = 1.0, 0.0
+	G = np.exp(-( (D-mu)**2 / ( 2.0 * sigma**2 ) ) )
+
+17. Find the nearest value from a given value in an array
+	Z.flat[np.abs(Z - z).argmin()]	
+
+18. Consider the following file:
+
+1,2,3,4,5
+6,,,7,8
+,,9,10,11
+
+How to read it ?
+	Z = genfromtxt("missing.dat", delimiter=",")
+
+
+	
